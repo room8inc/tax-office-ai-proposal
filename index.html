@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>税理士事務所AI活用提案書</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .proposal-wrapper {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .phase {
+            margin-bottom: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .phase-header {
+            padding: 30px 40px;
+            color: white;
+            position: relative;
+        }
+        
+        .phase-header.training {
+            background: #2c3e50;
+        }
+        
+        .phase-header.development {
+            background: #34495e;
+        }
+        
+        .phase-header.consulting {
+            background: #5d6d7e;
+        }
+        
+        .phase-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .phase-header .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .phase-content {
+            background: white;
+            padding: 40px;
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        .use-case {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .use-case:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #2c3e50;
+        }
+        
+        .use-case h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .use-case p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .demo-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        
+        .demo-box .instruction {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .demo-box .result {
+            color: #495057;
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid #2c3e50;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .client-benefit {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .client-benefit h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .roi-highlight {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .roi-highlight .amount {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .use-cases {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="proposal-wrapper">
+            <header class="header">
+                <h1>税理士事務所向け<br>AI活用パッケージ</h1>
+                <p class="subtitle">貴事務所の効率化から、クライアント企業の収益向上まで</p>
+            </header>
+            
+            <div class="content">
+                
+                <!-- Phase 1: 研修 -->
+                <div class="phase">
+                    <div class="phase-header training">
+                        <h2>Phase 1: すぐに始められるAI活用（研修）</h2>
+                        <p class="description">ChatGPT等の生成AIを使った業務効率化を学ぶ</p>
+                    </div>
+                    <div class="phase-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h3>📝 文書作成AI活用研修</h3>
+                                <p>議事録、メール、提案書などの作成時間を大幅短縮</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「田中商事の月次面談議事録を作成。売上好調、設備投資検討中、節税相談あり」</div>
+                                    <div class="result">【田中商事様 月次面談議事録】<br>日時: 2024年○月○日<br>・売上状況: 前年同月比+15%と好調<br>・設備投資: 新しい機械導入を検討中<br>・節税対策: 投資促進税制の活用を相談<br>【次回アクション】設備投資の詳細見積取得</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📊 説明資料作成支援</h3>
+                                <p>複雑な税務内容を顧客に分かりやすく説明する資料を自動生成</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「消費税の課税事業者になることを、飲食店の社長に分かりやすく説明して」</div>
+                                    <div class="result">【消費税課税事業者について】<br>田中社長、売上が1000万円を超えたため、来期から消費税の課税事業者になります。<br>・お客様からお預かりした消費税を税務署に納付<br>・仕入れや経費の消費税は差し引けます<br>・毎月の売上管理がより重要になります</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>⚖️ 税務調査対応文書作成</h3>
+                                <p>調査官への回答書や説明資料を適切な表現で作成</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「接待交際費の妥当性について、丁寧に説明する回答書を作成」</div>
+                                    <div class="result">「ご指摘の接待交際費につきまして、当該支出は取引先との良好な関係維持を目的とした業務上必要な支出でございます。参加者名簿および事業との関連性を示す資料を添付いたします。」</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: 開発 -->
+                <div class="phase">
+                    <div class="phase-header development">
+                        <h2>Phase 2: 本格的なAI業務システム（API連携開発）</h2>
+                        <p class="description">専用システムでさらに高度な業務自動化を実現</p>
+                    </div>
+                    <div class="phase-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h3>🤖 税務質問AIチャットボット</h3>
+                                <p>顧客向け・スタッフ向けの24時間対応AI相談窓口</p>
+                                <div class="demo-box">
+                                    <div class="instruction">顧客: 「200万円の中古車を7月に買ったけど、減価償却どうしたらいい？」</div>
+                                    <div class="result">中古車の簡便法耐用年数：2年<br>定率法償却率：1.000<br>7月取得の月割：9ヶ月<br>当期償却額：1,350,000円<br>（200万円×1.000×9/12）</div>
+                                </div>
+                                <ul class="feature-list">
+                                    <li>LINE・Slack・Teams等、使い慣れたツールで利用</li>
+                                    <li>顧客向け：基本的な税務質問に24時間対応</li>
+                                    <li>スタッフ向け：事務所ナレッジ＋顧客情報検索</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📊 経営分析AIアシスタント</h3>
+                                <p>決算書から自動で経営分析・改善提案を生成</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「全顧客の決算書から、業績悪化の兆候がある会社を3つピックアップして」</div>
+                                    <div class="result">【要注意顧客】<br>1. ○○商事：売上減少20%、原価率悪化<br>2. △△製作所：売掛金回転期間延長<br>3. □□サービス：営業キャッシュフロー赤字<br>【改善提案】早期の経営改善計画策定を推奨</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📞 面談準備AIコンシェルジュ</h3>
+                                <p>顧客面談前の資料準備を全自動化</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「明日の山田製作所との面談、何を話すべき？資料も準備して」</div>
+                                    <div class="result">【面談アジェンダ】<br>・前期業績好調（売上+18%）のお祝い<br>・設備投資減税の説明（期限12月末）<br>・来期の概算税額の説明<br>【準備資料】業績推移グラフ、減税シミュレーション</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>💡 補助金マッチングAI</h3>
+                                <p>顧客に最適な補助金を自動検索・提案</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「IT導入を検討してる製造業の顧客に使える補助金を調べて」</div>
+                                    <div class="result">【適用可能補助金】<br>1. IT導入補助金（最大450万円）<br>2. ものづくり補助金（最大1000万円）<br>3. 小規模事業者持続化補助金<br>【申請書類】自動生成可能</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>🎯 営業戦略AIプランナー</h3>
+                                <p>売上目標達成のための戦略的提案</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「今月売上目標まで50万足りない。どの顧客にどんなサービスを提案すべき？」</div>
+                                    <div class="result">【提案戦略】<br>1. A社：給与計算代行（月額8万円）成功率80%<br>2. B社：資金調達支援（30万円）成功率60%<br>3. C社：補助金申請支援（20万円）成功率90%<br>【優先度】C社→A社→B社の順で提案</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📝 顧客対応AIライター</h3>
+                                <p>個別顧客に最適化されたコミュニケーション</p>
+                                <div class="demo-box">
+                                    <div class="instruction">指示: 「田中商事の社長に、今期の業績好調を褒めつつ、来期の節税対策を提案するメールを書いて」</div>
+                                    <div class="result">田中社長、今期は売上2800万円と目標を大きく上回り、素晴らしい成果ですね。来期に向けて小規模企業共済や設備投資による節税対策はいかがでしょうか。詳しくご説明させていただきます。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3: クライアント支援 -->
+                <div class="phase">
+                    <div class="phase-header consulting">
+                        <h2>Phase 3: クライアント企業のAI業務効率化支援</h2>
+                        <p class="description">「手元に残るお金を増やす」ための業務効率化提案</p>
+                    </div>
+                    <div class="phase-content">
+                        <div class="client-benefit">
+                            <h4>💰 なぜクライアント企業にAI導入を提案するのか？</h4>
+                            <p>前回お聞きした「クライアントの手元に残るお金を少しでも増やしたい」というお話を実現するには、<strong>面倒で後回しにしがちな雑務を一つずつ解消</strong>していくことが効果的です。重要だけど緊急じゃない作業ほど、AIで均一化・自動化できます。</p>
+                        </div>
+                        
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h3>📧 後回しメール対応AI（小売業向け）</h3>
+                                <p>「返信しなきゃ」と思いつつ後回しにしてしまう、お礼メールや問い合わせ対応</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 「お客様からの問い合わせ、3日も放置してしまった...急いで返信しないと」</div>
+                                    <div class="result">「お問い合わせありがとうございます。確認に少しお時間をいただき申し訳ございませんでした。商品Aの在庫は○個ございます。ご注文お待ちしております。」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">溜まったメール処理のストレス解消 + 顧客満足度向上</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📊 月末の雑務自動化AI（製造業向け）</h3>
+                                <p>「月末だから売上まとめないと」「また月次報告書作らないと」の憂鬱を解消</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 「月末だ...売上集計と報告書作成、毎月ギリギリになって慌ててやってるな」</div>
+                                    <div class="result">「今月の売上は先月比+8%の1,200万円でした。主力商品Aが好調です。月次報告書も準備できています。いつものフォーマットでお送りしますね。」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">月末の憂鬱な集計作業：3時間 → 10分に短縮</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📋 見積書作成AI（建設業向け）</h3>
+                                <p>「また同じような見積書作ってる...」をサクッと解決</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 「キッチンリフォーム200万円の見積、前回のやつ参考に作り直さないと」</div>
+                                    <div class="result">「システムキッチン交換（120万円・工期5日）、内装工事（80万円・工期3日）。合計200万円、工期8日間。5年保証付きです。」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">見積書作成：1時間 → 10分に短縮</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>💬 忘れがちなフォローAI（サービス業向け）</h3>
+                                <p>「お客様にお礼の連絡しないと」「フォローの電話忘れてた」を解決</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 美容院「先週来てくれたお客様にお礼の連絡、毎回忘れちゃうんだよな」</div>
+                                    <div class="result">「先日はご来店ありがとうございました。仕上がりはいかがでしたか？何かご不明な点がございましたらお気軽にご連絡ください。またお待ちしております。」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">忘れがちなフォロー業務の均一化 + リピート率向上</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>📈 面倒な棚卸しAI（卸売業向け）</h3>
+                                <p>「在庫数えるの面倒だな」「また棚卸しの時期か...」の負担を軽減</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 「月に一度の棚卸し、数えるのが面倒で毎回後回しにしてしまう」</div>
+                                    <div class="result">「商品Aは残り18個、Bは32個です。今月の売れ行きだとAは来週、Bは再来週には発注が必要です。発注書を準備しましょうか？」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">面倒な棚卸し作業の簡素化 + 発注タイミングの最適化</div>
+                                </div>
+                            </div>
+                            
+                            <div class="use-case">
+                                <h3>🏭 毎朝の段取りAI（製造業向け）</h3>
+                                <p>「今日は何作るんだっけ？」の確認作業を効率化</p>
+                                <div class="demo-box">
+                                    <div class="instruction">よくある場面: 「毎朝、注文書と在庫を見て今日の作業を決めるのが日課。でも忙しいと適当になっちゃう」</div>
+                                    <div class="result">「おはようございます。今日は商品A（100個・午前中）、商品B（50個・午後）の予定です。Aの材料は準備済み、Bの材料は倉庫のA棚です。」</div>
+                                </div>
+                                <div class="roi-highlight">
+                                    <div class="amount">朝の段取り確認：毎日20分 → 5分に短縮</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="client-benefit">
+                            <h4>🎯 税理士事務所としての新しい価値提供</h4>
+                            <p>「税務会計だけじゃなく、面倒な雑務も楽にしてくれる」そんな税理士事務所になれば、クライアントにとって手放せない存在になります。<strong>大きなシステム導入ではなく、小さな雑務の解消を積み重ねる</strong>ことで、着実に手元に残るお金を増やしていけます。</p>
+                            <ul class="feature-list">
+                                <li>「面倒で後回し」を「さっと完了」に変える</li>
+                                <li>作業の品質を均一化し、属人性を解消</li>
+                                <li>導入コストは月数千円〜と手軽</li>
+                                <li>他の税理士事務所にはない独自サービス</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #2c3e50; color: white; padding: 40px; border-radius: 8px; text-align: center; margin: 40px 0;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 15px;">面倒な雑務から解放される働き方を</h3>
+                    <p style="font-size: 1.1rem; opacity: 0.9;">「やらなきゃいけないけど面倒」な作業を一つずつ解消していくことで、<br>貴事務所もクライアント企業も、本当に大切な業務に集中できるようになります。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
